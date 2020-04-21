@@ -1,10 +1,8 @@
-# react-boilerplate
-Boilerplate for new React 16.8 Projects
+# latent-explorer
+Site to explore latent space over your local network
 
 ## Setup
 
-1. Copy all the files to a new directory
-2. Go through each file and rename anything that says "React Boilerplate" to your own project name
 3. To generate favicon assets and html, use https://realfavicongenerator.net/
 4. Enter your Google Analytics Tracking ID in `/src/services/ga.js`
 
