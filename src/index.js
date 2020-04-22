@@ -6,7 +6,7 @@ import * as serviceWorker from "services/serviceWorker"
 import App from "./App"
 
 const rootElement = document.getElementById("root")
-ReactDOM.unstable_createRoot(rootElement).render(<App />)
+ReactDOM.render(<App />, rootElement)
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
