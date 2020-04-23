@@ -2,6 +2,8 @@ import React, { useState } from "react"
 import styled from "styled-components/macro"
 import { Form, Input, InputNumber, Slider, Row, Col, Collapse } from "antd"
 
+import { shadowRotate } from "./animations"
+
 const Container = styled.div`
   width: 100%;
   height: 100%;
@@ -11,6 +13,8 @@ const Container = styled.div`
 
 const Header = styled.h1`
   text-align: center;
+  color: white;
+  animation: ${shadowRotate} infinite forwards 8s linear;
 `
 
 const MAX_DIMENSIONS = 512
@@ -51,6 +55,7 @@ export default function Sidebar(props) {
   const [connectionUrl, setConnectionUrl] = useState("https://localhost:8000")
   const [dimensions, setDimensions] = useState(512)
   const [truncation, setTruncation] = useState(0.8)
+  const [defaultValue, setDefaultValue] = useState(0)
   const [changedVectors, setChangedVectors] = useState([])
 
   return (
@@ -79,6 +84,15 @@ export default function Sidebar(props) {
               onChange={val => setTruncation(val)}
               step={0.01}
               min={0}
+              max={1}
+            />
+          </Form.Item>
+          <Form.Item label="Default Value">
+            <InputNumber
+              value={defaultValue}
+              onChange={val => setDefaultValue(val)}
+              step={0.00001}
+              min={-1}
               max={1}
             />
           </Form.Item>
