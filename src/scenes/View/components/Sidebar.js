@@ -83,7 +83,6 @@ export default function Sidebar(props) {
             />
           </Form.Item>
         </Collapse.Panel>
-        <br />
         <Collapse.Panel header="Vector" key="2">
           {changedVectors.map((vec, i) => {
             return <DimensionSlider index={i} value={vec} />
