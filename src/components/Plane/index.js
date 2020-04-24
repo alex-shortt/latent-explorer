@@ -2,9 +2,11 @@ import React from "react"
 import styled from "styled-components/macro"
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch"
 
-const Piece = styled.div``
+// eslint-disable-next-line import/no-cycle
+import Item from "./components/Item"
+import Controls from "./components/Controls"
 
-const SIZE = 10000
+export const SIZE = 10000
 
 const POINT_COLOR = "#080818"
 const BACKGROUND_COLOR = "#ffffff"
@@ -14,6 +16,8 @@ const Container = styled.div`
   width: ${SIZE}px;
   height: ${SIZE}px;
   border: inset 2px ${POINT_COLOR};
+  transform: translate(-50%, -50%);
+  cursor: grab;
   background: repeating-linear-gradient(
       to bottom,
       transparent,
@@ -28,14 +32,10 @@ const Container = styled.div`
       ${BACKGROUND_COLOR} 2px,
       ${BACKGROUND_COLOR} 20px
     );
-`
 
-const Floating = styled.div.attrs(props => ({
-  style: {
-    transform: `translate(${props.x}px, ${props.y}px) translate(-50%, -50%)`
+  &:active {
+    cursor: grabbing;
   }
-}))`
-  position: absolute;
 `
 
 const Image = styled.img.attrs({
@@ -45,38 +45,30 @@ const Image = styled.img.attrs({
   width: 400px;
 `
 
-function Item(props) {
-  const CENTER_X = SIZE / 2 + window.innerWidth / 2
-  const CENTER_Y = SIZE / 2 + window.innerHeight / 2
-  const { x = CENTER_X, y = CENTER_Y, children } = props
-
-  return (
-    <Floating x={x} y={y}>
-      {children}
-    </Floating>
-  )
-}
-
 export default function Plane(props) {
-  const CENTER_X = SIZE / 2
-  const CENTER_Y = SIZE / 2
-
   return (
     <TransformWrapper
       options={{
-        limitToBounds: false
+        limitToBounds: false,
+        centerContent: false,
+        minScale: 0.5
       }}
-      defaultPositionX={-CENTER_X}
-      defaultPositionY={-CENTER_Y}
-      wheel={{ step: SIZE / 100 }}
+      defaultPositionX={0}
+      defaultPositionY={0}
+      wheel={{ step: SIZE / 120 }}
     >
-      <TransformComponent>
-        <Container>
-          <Item>
-            <Image />
-          </Item>
-        </Container>
-      </TransformComponent>
+      {transformProps => (
+        <>
+          <TransformComponent>
+            <Container>
+              <Item>
+                <Image />
+              </Item>
+            </Container>
+          </TransformComponent>
+          <Controls transformProps={transformProps} />
+        </>
+      )}
     </TransformWrapper>
   )
 }

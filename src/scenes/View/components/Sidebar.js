@@ -1,6 +1,11 @@
 import React, { useState } from "react"
 import styled from "styled-components/macro"
 import { Form, Input, InputNumber, Slider, Row, Col, Collapse } from "antd"
+import {
+  PlusSquareTwoTone,
+  VerticalAlignBottomOutlined,
+  VerticalAlignTopOutlined
+} from "@ant-design/icons"
 
 import { shadowRotate } from "./animations"
 
@@ -18,6 +23,44 @@ const Header = styled.h1`
 `
 
 const MAX_DIMENSIONS = 512
+
+const Spacer = styled.div`
+  height: 100%;
+  width: 15px;
+`
+
+const vectorSettings = () => {
+  const style = { fontSize: "1.2rem", marginTop: "3px" }
+
+  const exportVector = e => {
+    e.stopPropagation()
+    alert("asfsad")
+  }
+
+  const importVector = e => {
+    e.stopPropagation()
+    alert("asdf")
+  }
+
+  const addPoint = e => {
+    e.stopPropagation()
+    alert("hello")
+  }
+
+  return (
+    <Row>
+      <VerticalAlignTopOutlined style={style} onClick={exportVector} />
+      <Spacer />
+      <VerticalAlignBottomOutlined style={style} onClick={importVector} />
+      <Spacer />
+      <PlusSquareTwoTone
+        twoToneColor="#0DAEEB"
+        style={style}
+        onClick={addPoint}
+      />
+    </Row>
+  )
+}
 
 function DimensionSliderBase(props) {
   const { index } = props
@@ -97,7 +140,7 @@ export default function Sidebar(props) {
             />
           </Form.Item>
         </Collapse.Panel>
-        <Collapse.Panel header="Vector" key="2">
+        <Collapse.Panel header="Vector" key="2" extra={vectorSettings()}>
           {changedVectors.map((vec, i) => {
             return <DimensionSlider index={i} value={vec} />
           })}

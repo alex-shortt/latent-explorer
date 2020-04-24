@@ -2,9 +2,9 @@ import React from "react"
 import styled from "styled-components/macro"
 
 import Helmet from "components/Helmet"
+import Plane from "components/Plane"
 
 import Sidebar from "./components/Sidebar"
-import Plane from "./components/Plane"
 
 const Container = styled.div`
   width: 100%;
