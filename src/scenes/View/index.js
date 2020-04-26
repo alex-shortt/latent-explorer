@@ -3,8 +3,7 @@ import styled from "styled-components/macro"
 
 import Helmet from "components/Helmet"
 import Plane from "components/Plane"
-
-import Sidebar from "./components/Sidebar"
+import Sidebar from "components/Sidebar"
 
 const Container = styled.div`
   width: 100%;

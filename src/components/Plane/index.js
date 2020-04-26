@@ -43,6 +43,7 @@ const Image = styled.img.attrs({
     "https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
 })`
   width: 400px;
+  cursor: pointer;
 `
 
 export default function Plane(props) {

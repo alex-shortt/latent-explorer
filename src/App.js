@@ -6,6 +6,7 @@ import GlobalStyles from "styles/globalStyles"
 import FullScreenLoading from "components/FullScreenLoading"
 import ScrollToTop from "components/ScrollToTop"
 import GA from "services/ga"
+import { SettingsProvider } from "services/settings"
 
 const View = React.lazy(() => import("scenes/View"))
 
@@ -23,10 +24,12 @@ export default function App() {
         <Router>
           <GoogleAnalytics />
           <ScrollToTop>
-            <Switch>
-              <Route path="/" component={View} />
-              {/* TODO: 404 Page */}
-            </Switch>
+            <SettingsProvider>
+              <Switch>
+                <Route path="/" component={View} />
+                {/* TODO: 404 Page */}
+              </Switch>
+            </SettingsProvider>
           </ScrollToTop>
         </Router>
       </React.Suspense>
