@@ -4,6 +4,7 @@ import styled from "styled-components/macro"
 import Helmet from "components/Helmet"
 import Plane from "components/Plane"
 import Sidebar from "components/Sidebar"
+import { WorkspaceProvider } from "services/workspace"
 
 const Container = styled.div`
   width: 100%;
@@ -26,14 +27,16 @@ const PlaneContainer = styled.div`
 
 export default function View(props) {
   return (
-    <Container>
-      <Helmet title="View" />
-      <PlaneContainer>
-        <Plane />
-      </PlaneContainer>
-      <SidebarContainer>
-        <Sidebar />
-      </SidebarContainer>
-    </Container>
+    <WorkspaceProvider>
+      <Container>
+        <Helmet title="View" />
+        <PlaneContainer>
+          <Plane />
+        </PlaneContainer>
+        <SidebarContainer>
+          <Sidebar />
+        </SidebarContainer>
+      </Container>
+    </WorkspaceProvider>
   )
 }

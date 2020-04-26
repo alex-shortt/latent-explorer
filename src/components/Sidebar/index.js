@@ -2,8 +2,10 @@ import React from "react"
 import styled from "styled-components/macro"
 import { Collapse } from "antd"
 
-import VectorPanel from "./components/VectorPanel"
+import VectorsControls from "./components/VectorsControls"
+import VectorsPanel from "./components/VectorsPanel"
 import SettingsPanel from "./components/SettingsPanel"
+import PathsPanel from "./components/PathsPanel"
 import { shadowRotate } from "./assets/animations"
 
 const Container = styled.div`
@@ -28,8 +30,11 @@ export default function Sidebar(props) {
         <Collapse.Panel header="Settings" key="1">
           <SettingsPanel />
         </Collapse.Panel>
-        <Collapse.Panel header="Vector" key="2">
-          <VectorPanel />
+        <Collapse.Panel header="Vectors" key="2" extra={<VectorsControls />}>
+          <VectorsPanel />
+        </Collapse.Panel>
+        <Collapse.Panel header="Paths" key="3">
+          <PathsPanel />
         </Collapse.Panel>
       </Collapse>
     </Container>
