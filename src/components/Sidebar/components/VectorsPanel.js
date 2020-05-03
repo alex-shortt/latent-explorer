@@ -57,6 +57,10 @@ export default function VectorsPanel(props) {
     [invalidateState]
   )
 
+  const saveVector = vector => {
+    exportToJson({ z: JSON.parse(vector.getVectorString()) }, vector.getName())
+  }
+
   return (
     <>
       <VectorInput open={inputOpen} setOpen={setInputOpen} />
@@ -76,6 +80,9 @@ export default function VectorsPanel(props) {
                 description={[
                   <Action key="delete" onClick={() => deleteVector(vector)}>
                     delete
+                  </Action>,
+                  <Action key="save" onClick={() => saveVector(vector)}>
+                    save
                   </Action>
                 ]}
               />
@@ -85,4 +92,26 @@ export default function VectorsPanel(props) {
       />
     </>
   )
+}
+
+const exportToJson = (objectData, fileName) => {
+  const filename = `${fileName}.json`
+  const contentType = "application/json;charset=utf-8;"
+  if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+    const blob = new Blob(
+      [decodeURIComponent(encodeURI(JSON.stringify(objectData)))],
+      { type: contentType }
+    )
+    navigator.msSaveOrOpenBlob(blob, filename)
+  } else {
+    const a = document.createElement("a")
+    a.download = filename
+    a.href = `data:${contentType},${encodeURIComponent(
+      JSON.stringify(objectData)
+    )}`
+    a.target = "_blank"
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+  }
 }
