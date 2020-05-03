@@ -27,6 +27,7 @@ export default class Vector {
     this.name = name
     this.id = uuidv1()
     this.response = null
+    this.vectorString = null
   }
 
   getName() {
@@ -41,12 +42,17 @@ export default class Vector {
     return this.tensor
   }
 
+  getVectorString() {
+    return this.vectorString
+  }
+
   getResponse() {
     return this.response
   }
 
   async loadResponse(url) {
     const array = await this.tensor.array()
+    this.vectorString = JSON.stringify(array)
 
     const body = {
       z: array,

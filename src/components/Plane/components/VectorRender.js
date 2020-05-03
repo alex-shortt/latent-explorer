@@ -12,7 +12,7 @@ export default function VectorRender(props) {
   const { vector } = props
   const {} = useContext(SettingsContext)
 
-  const [image, setImage] = useState(vector.getResponse())
+  const image = vector.getResponse()
 
   if (!image) {
     return (

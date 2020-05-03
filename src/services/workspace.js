@@ -1,5 +1,4 @@
 import React, { useState, useContext, useCallback } from "react"
-import useDeepCompareEffect from "use-deep-compare-effect"
 
 import { SettingsContext } from "./settings"
 
@@ -14,8 +13,20 @@ export function WorkspaceProvider(props) {
 
   const addVector = useCallback(
     async vector => {
+      vector.setName(`Untitled Vector ${vectors.length + 1}`)
       await vector.loadResponse(connectionUrl)
       const newVectors = [...vectors, vector]
+      setVectors(newVectors)
+    },
+    [connectionUrl, vectors]
+  )
+
+  const deleteVector = useCallback(
+    async vector => {
+      const newVectors = [...vectors, vector].filter(
+        vec => vec.getId() !== vector.getId()
+      )
+
       setVectors(newVectors)
     },
     [vectors]
@@ -38,6 +49,7 @@ export function WorkspaceProvider(props) {
     invalidateState,
     vectors,
     addVector,
+    deleteVector,
     paths,
     addPath
   }
