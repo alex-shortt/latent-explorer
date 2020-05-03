@@ -57,7 +57,11 @@ export default function Plane(props) {
           <TransformComponent>
             <Container>
               {vectors.map(vector => (
-                <Item key={vector.getId()} title={vector.getName()}>
+                <Item
+                  key={vector.getId()}
+                  title={vector.getName()}
+                  transformProps={transformProps}
+                >
                   <VectorRender vector={vector} />
                 </Item>
               ))}

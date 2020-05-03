@@ -1,7 +1,5 @@
-import React, { useEffect, useState, useContext } from "react"
+import React from "react"
 import styled from "styled-components/macro"
-
-import { SettingsContext } from "services/settings"
 
 const Image = styled.img`
   width: 500px;
@@ -10,7 +8,6 @@ const Image = styled.img`
 
 export default function VectorRender(props) {
   const { vector } = props
-  const {} = useContext(SettingsContext)
 
   const image = vector.getResponse()
 

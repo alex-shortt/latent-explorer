@@ -20,6 +20,16 @@ const Action = styled.a`
   }
 `
 
+function VectorTitle(props) {
+  const { vector, onChange } = props
+
+  return (
+    <Text editable={{ onChange: str => onChange(str, vector) }}>
+      {vector.getName()}
+    </Text>
+  )
+}
+
 export default function VectorsPanel(props) {
   const { vectors, deleteVector, invalidateState } = useContext(
     WorkspaceContext
@@ -41,11 +51,7 @@ export default function VectorsPanel(props) {
           <List.Item>
             <List.Item.Meta
               avatar={<Avatar src={vector.getResponse()} />}
-              title={() => (
-                <Text editable={{ onChange: str => onChange(str, vector) }}>
-                  {vector.getName()}
-                </Text>
-              )}
+              title={<VectorTitle vector={vector} onChange={onChange} />}
               description={[
                 <Action key="edit">edit</Action>,
                 <Action key="view">view</Action>,
