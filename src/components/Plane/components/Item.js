@@ -1,8 +1,7 @@
 import React from "react"
 import styled from "styled-components/macro"
 
-// eslint-disable-next-line import/no-cycle
-import { SIZE } from ".."
+import { PLANE_SIZE } from "../constants"
 
 const Container = styled.div.attrs(props => ({
   style: {
@@ -15,8 +14,8 @@ const Container = styled.div.attrs(props => ({
 `
 
 export default function Item(props) {
-  const CENTER_X = SIZE / 2 + window.innerWidth / 2
-  const CENTER_Y = SIZE / 2 + window.innerHeight / 2
+  const CENTER_X = PLANE_SIZE / 2 + window.innerWidth / 2
+  const CENTER_Y = PLANE_SIZE / 2 + window.innerHeight / 2
   const { x = CENTER_X, y = CENTER_Y, children } = props
 
   return (

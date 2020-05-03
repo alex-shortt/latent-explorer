@@ -7,7 +7,7 @@ const MAX_DIMENSIONS = 512
 export function SettingsProvider(props) {
   const { children } = props
 
-  const [connectionUrl, setConnectionUrl] = useState("https://localhost:8000")
+  const [connectionUrl, setConnectionUrl] = useState("http://localhost:8000")
   const [dimensions, setDimensions] = useState(512)
   const [truncation, setTruncation] = useState(0.8)
   const [defaultValue, setDefaultValue] = useState(0)
