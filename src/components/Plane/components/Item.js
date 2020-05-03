@@ -10,12 +10,12 @@ const Container = styled.div`
 `
 
 const TitleBar = styled.div.attrs({ className: "handle" })`
-  padding: 4px 10px;
+  padding: 5px 15px;
   width: 100%;
   background: black;
   color: white;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 1.5rem;
 `
 
 export default function Item(props) {

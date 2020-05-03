@@ -2,7 +2,6 @@ import React from "react"
 import styled from "styled-components/macro"
 import { Collapse } from "antd"
 
-import VectorsControls from "./components/VectorsControls"
 import VectorsPanel from "./components/VectorsPanel"
 import SettingsPanel from "./components/SettingsPanel"
 import PathsPanel from "./components/PathsPanel"
@@ -25,12 +24,11 @@ export default function Sidebar(props) {
   return (
     <Container>
       <Header>Latent Explorer</Header>
-      <br />
       <Collapse>
         <Collapse.Panel header="Settings" key="1">
           <SettingsPanel />
         </Collapse.Panel>
-        <Collapse.Panel header="Vectors" key="2" extra={<VectorsControls />}>
+        <Collapse.Panel header="Vectors" key="2">
           <VectorsPanel />
         </Collapse.Panel>
         <Collapse.Panel header="Paths" key="3">

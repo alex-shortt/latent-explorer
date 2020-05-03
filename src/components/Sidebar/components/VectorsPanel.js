@@ -1,7 +1,14 @@
-import React, { useContext, useCallback } from "react"
+import React, { useContext, useCallback, useState } from "react"
 import styled from "styled-components/macro"
-import { List as ListBase, Avatar, Typography } from "antd"
+import {
+  List as ListBase,
+  Avatar,
+  Typography,
+  Button as ButtonBase
+} from "antd"
+import { PlusOutlined } from "@ant-design/icons"
 
+import VectorInput from "components/VectorInput"
 import { WorkspaceContext } from "services/workspace"
 
 const { Text } = Typography
@@ -20,6 +27,11 @@ const Action = styled.a`
   }
 `
 
+const Button = styled(ButtonBase)`
+  display: block !important;
+  margin: 0 auto;
+`
+
 function VectorTitle(props) {
   const { vector, onChange } = props
 
@@ -35,6 +47,8 @@ export default function VectorsPanel(props) {
     WorkspaceContext
   )
 
+  const [inputOpen, setInputOpen] = useState(false)
+
   const onChange = useCallback(
     (str, vector) => {
       vector.setName(str)
@@ -44,26 +58,30 @@ export default function VectorsPanel(props) {
   )
 
   return (
-    <List
-      dataSource={vectors}
-      renderItem={vector => {
-        return (
-          <List.Item>
-            <List.Item.Meta
-              avatar={<Avatar src={vector.getResponse()} />}
-              title={<VectorTitle vector={vector} onChange={onChange} />}
-              description={[
-                <Action key="edit">edit</Action>,
-                <Action key="view">view</Action>,
-                <Action key="save">save</Action>,
-                <Action key="delete" onClick={() => deleteVector(vector)}>
-                  delete
-                </Action>
-              ]}
-            />
-          </List.Item>
-        )
-      }}
-    />
+    <>
+      <VectorInput open={inputOpen} setOpen={setInputOpen} />
+      <Button onClick={() => setInputOpen(true)}>
+        <PlusOutlined />
+        Add Vector
+      </Button>
+      <List
+        dataSource={vectors}
+        renderItem={vector => {
+          return (
+            <List.Item>
+              <List.Item.Meta
+                avatar={<Avatar src={vector.getResponse()} />}
+                title={<VectorTitle vector={vector} onChange={onChange} />}
+                description={[
+                  <Action key="delete" onClick={() => deleteVector(vector)}>
+                    delete
+                  </Action>
+                ]}
+              />
+            </List.Item>
+          )
+        }}
+      />
+    </>
   )
 }
