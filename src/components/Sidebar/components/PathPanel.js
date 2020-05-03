@@ -8,8 +8,9 @@ import {
 } from "antd"
 import { PlusOutlined } from "@ant-design/icons"
 
-import VectorInput from "components/VectorInput"
 import { WorkspaceContext } from "services/workspace"
+
+import PathInput from "../../PathInput"
 
 const { Text } = Typography
 
@@ -32,26 +33,24 @@ const Button = styled(ButtonBase)`
   margin: 0 auto;
 `
 
-function VectorTitle(props) {
-  const { vector, onChange } = props
+function PathTitle(props) {
+  const { path, onChange } = props
 
   return (
-    <Text editable={{ onChange: str => onChange(str, vector) }}>
-      {vector.getName()}
+    <Text editable={{ onChange: str => onChange(str, path) }}>
+      {path.getName()}
     </Text>
   )
 }
 
-export default function VectorsPanel(props) {
-  const { vectors, deleteVector, invalidateState } = useContext(
-    WorkspaceContext
-  )
+export default function PathsPanel(props) {
+  const { paths, deletePath, invalidateState } = useContext(WorkspaceContext)
 
   const [inputOpen, setInputOpen] = useState(false)
 
   const onChange = useCallback(
-    (str, vector) => {
-      vector.setName(str)
+    (str, path) => {
+      path.setName(str)
       invalidateState()
     },
     [invalidateState]
@@ -59,22 +58,22 @@ export default function VectorsPanel(props) {
 
   return (
     <>
-      <VectorInput open={inputOpen} setOpen={setInputOpen} />
+      <PathInput open={inputOpen} setOpen={setInputOpen} />
       <Button onClick={() => setInputOpen(true)}>
         <PlusOutlined />
-        Add Vector
+        Add Path
       </Button>
       <br />
       <List
-        dataSource={vectors}
-        renderItem={vector => {
+        dataSource={paths}
+        renderItem={path => {
           return (
             <List.Item>
               <List.Item.Meta
-                avatar={<Avatar src={vector.getResponse()} />}
-                title={<VectorTitle vector={vector} onChange={onChange} />}
+                avatar={<Avatar src={path.getVectors()[0].getResponse()} />}
+                title={<PathTitle path={path} onChange={onChange} />}
                 description={[
-                  <Action key="delete" onClick={() => deleteVector(vector)}>
+                  <Action key="delete" onClick={() => deletePath(path)}>
                     delete
                   </Action>
                 ]}

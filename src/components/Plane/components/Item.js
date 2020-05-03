@@ -22,7 +22,14 @@ export default function Item(props) {
   const CENTER_X = PLANE_SIZE / 2 + window.innerWidth / 2
   const CENTER_Y = PLANE_SIZE / 2 + window.innerHeight / 2
 
-  const { x = CENTER_X, y = CENTER_Y, title, transformProps, children } = props
+  const {
+    x = CENTER_X,
+    y = CENTER_Y,
+    title,
+    transformProps,
+    width = "500px",
+    children
+  } = props
   const { scale } = transformProps
 
   const onStart = e => {
@@ -38,7 +45,7 @@ export default function Item(props) {
       onStart={onStart}
       onDrag={onStart}
     >
-      <Container>
+      <Container style={{ width }}>
         <TitleBar>{title}</TitleBar>
         {children}
       </Container>

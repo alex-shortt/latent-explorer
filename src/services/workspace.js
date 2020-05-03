@@ -26,18 +26,29 @@ export function WorkspaceProvider(props) {
       const newVectors = [...vectors, vector].filter(
         vec => vec.getId() !== vector.getId()
       )
-
       setVectors(newVectors)
     },
     [vectors]
   )
 
   const addPath = useCallback(
-    path => {
+    async path => {
+      await path.loadResponses(connectionUrl)
       const newPaths = [...paths, path]
       setPaths(newPaths)
+      console.log(path)
     },
-    [paths]
+    [connectionUrl, paths]
+  )
+
+  const deletePath = useCallback(
+    path => {
+      const newVectors = [...vectors, path].filter(
+        pat => pat.getId() !== path.getId()
+      )
+      setVectors(newVectors)
+    },
+    [vectors]
   )
 
   const invalidateState = useCallback(() => {
@@ -51,6 +62,7 @@ export function WorkspaceProvider(props) {
     addVector,
     deleteVector,
     paths,
+    deletePath,
     addPath
   }
 

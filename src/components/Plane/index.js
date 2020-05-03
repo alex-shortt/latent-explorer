@@ -6,6 +6,7 @@ import { WorkspaceContext } from "services/workspace"
 
 import { PLANE_SIZE } from "./constants"
 import VectorRender from "./components/VectorRender"
+import PathRender from "./components/PathRender"
 import Controls from "./components/Controls"
 import Item from "./components/Item"
 
@@ -39,14 +40,19 @@ const Container = styled.div`
   }
 `
 export default function Plane(props) {
-  const { vectors } = useContext(WorkspaceContext)
+  const { vectors, paths } = useContext(WorkspaceContext)
+
+  console.log("vectors")
+  console.log(vectors)
+  console.log("paths")
+  console.log(paths)
 
   return (
     <TransformWrapper
       options={{
         limitToBounds: false,
         centerContent: false,
-        minScale: 0.5
+        minScale: 0.1
       }}
       defaultPositionX={0}
       defaultPositionY={0}
@@ -63,6 +69,16 @@ export default function Plane(props) {
                   transformProps={transformProps}
                 >
                   <VectorRender vector={vector} />
+                </Item>
+              ))}
+              {paths.map(path => (
+                <Item
+                  key={path.getId()}
+                  title={path.getName()}
+                  transformProps={transformProps}
+                  width={520 * path.getVectors().length - 20}
+                >
+                  <PathRender path={path} />
                 </Item>
               ))}
             </Container>

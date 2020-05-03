@@ -3,10 +3,18 @@ import { v1 as uuidv1 } from "uuid"
 
 export default class Vector {
   constructor(dimensions, props = {}) {
-    const { name = "Untitled Vector", vector, zeroVector, randomVector } = props
+    const {
+      name = "Untitled Vector",
+      tensor,
+      vector,
+      zeroVector,
+      randomVector
+    } = props
 
     let tfVector
-    if (vector) {
+    if (tensor) {
+      tfVector = tensor
+    } else if (vector) {
       try {
         tfVector = tf.tensor(JSON.parse(vector))
       } catch (err) {

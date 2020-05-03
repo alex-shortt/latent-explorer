@@ -4,7 +4,7 @@ import { Collapse } from "antd"
 
 import VectorsPanel from "./components/VectorsPanel"
 import SettingsPanel from "./components/SettingsPanel"
-import PathsPanel from "./components/PathsPanel"
+import PathsPanel from "./components/PathPanel"
 import { shadowRotate } from "./assets/animations"
 
 const Container = styled.div`

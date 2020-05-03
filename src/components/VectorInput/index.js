@@ -43,7 +43,6 @@ export default function VectorInput(props) {
       title="Create a New Vector"
       visible={open}
       onCancel={() => setOpen(false)}
-      onClick={e => e.stopPropagation()}
     >
       <Button onClick={createZeroVector}>Create a Zero Vector</Button>
       <hr />
